@@ -44,8 +44,53 @@ if (heroTitle) {
   });
 }
 
-// Try the local photo first, then the repository's raw image URL if the page
-// is being previewed from a location where relative image paths do not resolve.
+// Load the BCA-inspired coding visuals without changing the existing portfolio sections.
+const codingStyles = document.createElement('link');
+codingStyles.rel = 'stylesheet';
+codingStyles.href = 'coding.css';
+document.head.append(codingStyles);
+
+const codingNavLink = document.createElement('a');
+codingNavLink.href = '#coding';
+codingNavLink.textContent = 'Coding';
+navigation?.insertBefore(codingNavLink, navigation.querySelector('.nav-cta'));
+
+const codingSection = document.createElement('section');
+codingSection.className = 'coding-section section-pad';
+codingSection.id = 'coding';
+codingSection.innerHTML = `
+  <div class="section-wrap coding-layout">
+    <div class="coding-intro reveal">
+      <p class="eyebrow"><span class="code-eyebrow-icon" aria-hidden="true">&lt;/&gt;</span> MY BCA · MY CODE JOURNEY</p>
+      <h2>Curiosity, meet<br><em>code.</em></h2>
+      <p class="coding-description">As a BCA student, I’m exploring how ideas turn into websites and useful digital experiences. I’m at the beginning of my coding journey—and excited to keep learning, experimenting, and creating.</p>
+      <div class="coding-topics" aria-label="Coding topics to explore">
+        <span><b>01</b> HTML · page structure</span>
+        <span><b>02</b> CSS · visual design</span>
+        <span><b>03</b> JavaScript · interactivity</span>
+      </div>
+      <p class="coding-note"><span class="coding-live-dot"></span> Learning in progress — one line at a time</p>
+    </div>
+    <div class="code-window reveal" aria-label="Decorative code editor showing an example portfolio card">
+      <div class="editor-topbar"><div class="editor-dots" aria-hidden="true"><i></i><i></i><i></i></div><span class="editor-filename"><span aria-hidden="true">◈</span> bilkis-card.html</span><span class="editor-language">HTML</span></div>
+      <div class="editor-body"><div class="editor-lines" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></div><pre><code><span class="code-comment">&lt;!-- My next chapter --&gt;</span>
+<span class="code-pink">&lt;article</span> <span class="code-green">class</span>=<span class="code-yellow">"bca-student"</span><span class="code-pink">&gt;</span>
+  <span class="code-pink">&lt;h2&gt;</span>Hello, world!<span class="code-pink">&lt;/h2&gt;</span>
+  <span class="code-pink">&lt;p&gt;</span>
+    BCA student at KKSOU
+    <span class="code-blue">and always learning.</span>
+  <span class="code-pink">&lt;/p&gt;</span>
+  <span class="code-pink">&lt;a</span> <span class="code-green">href</span>=<span class="code-yellow">"#coding"</span><span class="code-pink">&gt;</span>Explore<span class="code-pink">&lt;/a&gt;</span>
+<span class="code-pink">&lt;/article&gt;</span></code></pre></div>
+      <div class="editor-footer"><span><span aria-hidden="true">●</span> Ready to learn</span><span>UTF-8&nbsp; · &nbsp;HTML</span></div>
+      <span class="code-sticker" aria-hidden="true">{ curious<br>&nbsp; &nbsp;: true }</span>
+    </div>
+  </div>`;
+
+const skillsSection = document.querySelector('#skills');
+if (skillsSection) skillsSection.parentNode.insertBefore(codingSection, skillsSection);
+
+// Try the local photo first, then the repository's raw image URL if relative paths fail.
 const portrait = document.querySelector('.portrait-image img');
 if (portrait) {
   const handlePortraitError = () => {
