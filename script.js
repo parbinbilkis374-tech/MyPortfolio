@@ -16,6 +16,39 @@ navigation?.querySelectorAll('a').forEach((link) => {
   });
 });
 
+// Present the requested skills and proficiency level in the portfolio.
+const skillsSection = document.querySelector('#skills');
+if (skillsSection) {
+  const heading = skillsSection.querySelector('.section-heading h2');
+  if (heading) heading.innerHTML = 'Expert skills,<br><em>everyday tools.</em>';
+
+  const intro = skillsSection.querySelector('.skills-intro');
+  if (intro) intro.textContent = 'I have expert-level skills in these productivity, presentation, and web technologies.';
+
+  const skillList = skillsSection.querySelector('.skill-list');
+  const skills = [
+    { name: 'Microsoft Excel', badge: 'X', className: 'excel' },
+    { name: 'Microsoft Word', badge: 'W', className: 'word' },
+    { name: 'Microsoft PowerPoint', badge: 'P', className: 'powerpoint' },
+    { name: 'Microsoft Access', badge: 'A', className: 'access' },
+    { name: 'Google Docs', badge: 'D', className: 'word' },
+    { name: 'Google Sheets', badge: 'S', className: 'excel' },
+    { name: 'HTML', badge: '<>', className: 'access' },
+  ];
+
+  if (skillList) {
+    skillList.replaceChildren(...skills.map(({ name, badge, className }) => {
+      const item = document.createElement('div');
+      item.className = 'skill-item';
+      item.innerHTML = `<div class="skill-name"><span class="skill-badge ${className}">${badge}</span><span>${name}</span><span class="skill-level">Expert</span></div><div class="skill-track"><span style="--progress:100%"></span></div>`;
+      return item;
+    }));
+  }
+
+  const footnote = skillsSection.querySelector('.skills-footnote');
+  if (footnote) footnote.textContent = 'Skills and proficiency levels are self-assessed.';
+}
+
 // Reveal the hero title one character at a time while keeping it accessible.
 const heroTitle = document.querySelector('.hero h1');
 if (heroTitle) {
@@ -63,7 +96,7 @@ codingSection.innerHTML = `
     <div class="coding-intro reveal">
       <p class="eyebrow"><span class="code-eyebrow-icon" aria-hidden="true">&lt;/&gt;</span> MY BCA · MY CODE JOURNEY</p>
       <h2>Curiosity, meet<br><em>code.</em></h2>
-      <p class="coding-description">As a BCA student, I’m exploring how ideas turn into websites and useful digital experiences. I’m at the beginning of my coding journey—and excited to keep learning, experimenting, and creating.</p>
+      <p class="coding-description">As a BCA student, I’m exploring how ideas turn into websites and useful digital experiences. I’m excited to keep learning and growing my coding skills.</p>
       <div class="coding-topics" aria-label="Coding topics to explore">
         <span><b>01</b> HTML · page structure</span>
         <span><b>02</b> CSS · visual design</span>
@@ -72,23 +105,20 @@ codingSection.innerHTML = `
       <p class="coding-note"><span class="coding-live-dot"></span> Learning in progress — one line at a time</p>
     </div>
     <div class="code-window reveal" aria-label="Decorative code editor showing an example portfolio card">
-      <div class="editor-topbar"><div class="editor-dots" aria-hidden="true"><i></i><i></i><i></i></div><span class="editor-filename"><span aria-hidden="true">◈</span> bilkis-card.html</span><span class="editor-language">HTML</span></div>
-      <div class="editor-body"><div class="editor-lines" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></div><pre><code><span class="code-comment">&lt;!-- My next chapter --&gt;</span>
-<span class="code-pink">&lt;article</span> <span class="code-green">class</span>=<span class="code-yellow">"bca-student"</span><span class="code-pink">&gt;</span>
-  <span class="code-pink">&lt;h2&gt;</span>Hello, world!<span class="code-pink">&lt;/h2&gt;</span>
-  <span class="code-pink">&lt;p&gt;</span>
-    BCA student at KKSOU
-    <span class="code-blue">and always learning.</span>
-  <span class="code-pink">&lt;/p&gt;</span>
-  <span class="code-pink">&lt;a</span> <span class="code-green">href</span>=<span class="code-yellow">"#coding"</span><span class="code-pink">&gt;</span>Explore<span class="code-pink">&lt;/a&gt;</span>
-<span class="code-pink">&lt;/article&gt;</span></code></pre></div>
+      <div class="editor-topbar"><div class="editor-dots" aria-hidden="true"><i></i><i></i><i></i></div><span class="editor-filename"><span aria-hidden="true">◈</span> bilkis-card.html</span></div>
+      <div class="editor-body"><pre><code>&lt;article class="bca-student"&gt;
+  &lt;h2&gt;Hello, world!&lt;/h2&gt;
+  &lt;p&gt;BCA student at KKSOU
+    and always learning.&lt;/p&gt;
+  &lt;a href="#coding"&gt;Explore&lt;/a&gt;
+&lt;/article&gt;</code></pre></div>
       <div class="editor-footer"><span><span aria-hidden="true">●</span> Ready to learn</span><span>UTF-8&nbsp; · &nbsp;HTML</span></div>
       <span class="code-sticker" aria-hidden="true">{ curious<br>&nbsp; &nbsp;: true }</span>
     </div>
   </div>`;
 
-const skillsSection = document.querySelector('#skills');
-if (skillsSection) skillsSection.parentNode.insertBefore(codingSection, skillsSection);
+const skillsAnchor = document.querySelector('#skills');
+if (skillsAnchor) skillsAnchor.parentNode.insertBefore(codingSection, skillsAnchor);
 
 // Try the local photo first, then the repository's raw image URL if relative paths fail.
 const portrait = document.querySelector('.portrait-image img');
@@ -109,7 +139,7 @@ if (portrait) {
 
 const animationStyles = document.createElement('style');
 animationStyles.textContent = `
-.hero-title .hero-letter{display:inline-block;color:inherit;font-style:inherit;opacity:0;transform:translateY(.45em) rotateX(-65deg);transform-origin:50% 100%;animation:hero-letter-in .48s cubic-bezier(.2,.75,.25,1) forwards;animation-delay:calc(var(--letter-index)*55ms);animation-play-state:paused}
+.hero-title .hero-letter{display:inline-block;color:inherit;font-style:inherit;opacity:0;transform:translateY(.45em) rotateX(-65deg);transform-origin:50% 100%;animation:hero-letter-in .48s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--letter-index)*.025s);animation-play-state:paused}
 .hero-copy.is-visible .hero-title .hero-letter{animation-play-state:running}
 @keyframes hero-letter-in{to{opacity:1;transform:translateY(0) rotateX(0)}}
 .portrait-image img{display:block;position:absolute;z-index:2;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom}
