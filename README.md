@@ -97,5 +97,5 @@ http://localhost:8000
 ---
 
 <p align="center">
-  <em>Built with care by Bilkis Parban</em>
+  <em>Built with care by Bilkis Parbin</em>
 </p>
